@@ -17,22 +17,11 @@ class CreationDialog extends StatelessWidget {
   Widget build(BuildContext context) => AlertDialog(
         backgroundColor: Theme.of(context).colorScheme.primary,
         content: SizedBox(
-          height: 200,
+          height: 150,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextField(
-                  controller: controller,
-                  decoration: InputDecoration(
-                      hintText: "Insert your new task...",
-                      hintStyle: TextStyle(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .secondary
-                              .withOpacity(0.8)),
-                      labelStyle: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18)))),
+              buildTextField(context),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -44,4 +33,28 @@ class CreationDialog extends StatelessWidget {
           ),
         ),
       );
+
+  TextField buildTextField(BuildContext context) => TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        hintText: "Insert your new task...",
+        hintStyle: TextStyle(
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.8)),
+        labelStyle: TextStyle(color: Theme.of(context).colorScheme.secondary),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.tertiary, width: 3),
+          borderRadius: BorderRadius.circular(18),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.tertiary, width: 3),
+          borderRadius: BorderRadius.circular(18),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.tertiary, width: 3),
+          borderRadius: BorderRadius.circular(18),
+        ),
+      ));
 }

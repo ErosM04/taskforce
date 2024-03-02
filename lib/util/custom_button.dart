@@ -10,6 +10,12 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) => MaterialButton(
         onPressed: onPressed,
         color: Theme.of(context).colorScheme.tertiary,
-        child: Text(text),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+          child: Text(text),
+        ),
       );
 }

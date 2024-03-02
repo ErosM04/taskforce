@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
             taskName: taskList[index][0],
             taskCompleted: taskList[index][1],
             onChanged: (value) => checkBoxChanged(value, index),
+            onArchive: (context) => archiveTask(context, index),
           ),
         ),
       );
@@ -72,4 +73,8 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(context).pop();
     _controller.clear();
   }
+
+  // to complete
+  void archiveTask(BuildContext context, int index) =>
+      setState(() => taskList.removeAt(index));
 }
