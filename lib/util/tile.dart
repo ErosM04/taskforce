@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TodoTile extends StatelessWidget {
+class TaskTile extends StatelessWidget {
   final String taskName;
   final bool taskCompleted;
   Function(bool?)? onChanged;
 
-  TodoTile({
+  TaskTile({
     super.key,
     required this.taskName,
     required this.taskCompleted,
@@ -22,12 +22,21 @@ class TodoTile extends StatelessWidget {
           child: Center(
             child: Row(
               children: [
-                Checkbox(value: taskCompleted, onChanged: onChanged),
+                Checkbox(
+                  value: taskCompleted,
+                  onChanged: onChanged,
+                  activeColor: Theme.of(context).colorScheme.tertiary,
+                  side: BorderSide(
+                      width: 2, color: Theme.of(context).colorScheme.secondary),
+                ),
                 Text(
                   taskName,
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.secondary,
-                      fontSize: 15),
+                      fontSize: 15,
+                      decoration:
+                          taskCompleted ? TextDecoration.lineThrough : null,
+                      decorationColor: Theme.of(context).colorScheme.secondary),
                 ),
               ],
             ),

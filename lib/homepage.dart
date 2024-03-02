@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskforce/util/dialog.dart';
 import 'package:taskforce/util/tile.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,11 +12,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<List> todoList = [
-    ["Do this", true],
-    ["Do that", false],
-    ["Fare cose", false],
-    ["Ballare la fresca", true],
+  final _controller = TextEditingController();
+  List<List> taskList = [
+    // ["Do this", true],
+    // ["Do that", false],
+    // ["Fare cose", false],
+    // ["Ballare la fresca", true],
   ];
 
   @override
@@ -37,22 +39,37 @@ class _HomePageState extends State<HomePage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(21),
           ),
-          onPressed: () {},
+          onPressed: () => createNewTask(),
           child: const Icon(
             Icons.add,
             size: 35,
           ),
         ),
         body: ListView.builder(
-          itemCount: todoList.length,
-          itemBuilder: (context, index) => TodoTile(
-            taskName: todoList[index][0],
-            taskCompleted: todoList[index][1],
+          itemCount: taskList.length,
+          itemBuilder: (context, index) => TaskTile(
+            taskName: taskList[index][0],
+            taskCompleted: taskList[index][1],
             onChanged: (value) => checkBoxChanged(value, index),
           ),
         ),
       );
 
   void checkBoxChanged(bool? value, int index) =>
-      setState(() => todoList[index][1] = !todoList[index][1]);
+      setState(() => taskList[index][1] = !taskList[index][1]);
+
+  void createNewTask() => showDialog(
+        context: context,
+        builder: (context) => CreationDialog(
+          controller: _controller,
+          onSave: () => saveNewTask(),
+          onCancel: () => Navigator.of(context).pop(),
+        ),
+      );
+
+  void saveNewTask() {
+    setState(() => taskList.add([_controller.text.trim(), false]));
+    Navigator.of(context).pop();
+    _controller.clear();
+  }
 }
