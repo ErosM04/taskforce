@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
             colorScheme: const ColorScheme.dark(
           primary: Color.fromARGB(255, 38, 52, 64),
           secondary: Color.fromARGB(255, 2, 115, 30),
-          tertiary: Color.fromARGB(255, 2, 115, 30),
+          tertiary: Color.fromARGB(255, 1, 64, 17),
         )),
         home: const HomePage(title: 'Task Force'),
       );
